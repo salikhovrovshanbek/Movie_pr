@@ -1,9 +1,14 @@
 package api
 
-import "github.com/gin-gonic/gin"
+import (
+	"Postgres_Gin/server"
+	"github.com/gin-gonic/gin"
+)
 
-func InitRouter() *gin.Engine {
+func InitRouter(s server.Server) *gin.Engine {
 	r := gin.Default()
+
+	r.GET("/getmovie", s.GetMovieBy)
 
 	return r
 }

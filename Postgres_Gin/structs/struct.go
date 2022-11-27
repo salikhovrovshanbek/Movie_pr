@@ -14,7 +14,7 @@ type Author struct {
 	ID        int
 	Name      string
 	Janr      string
-	Movies    []Movie
+	Movies    []string
 	BirthData time.Time
 	DeathData time.Time
 }
