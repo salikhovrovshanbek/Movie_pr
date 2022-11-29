@@ -23,3 +23,17 @@ func (s Service) GetMovieBy(ctx context.Context) ([]structs.Movie, error) {
 	}
 	return m, nil
 }
+
+func (s Service) CreateMovie(ctx context.Context, movie structs.Movie) error {
+	if err := s.repo.CreateMovie(ctx, movie); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s Service) CreateAuthor(ctx context.Context, author structs.Author) error {
+	if err := s.repo.CreateAuthor(ctx, author); err != nil {
+		return err
+	}
+	return nil
+}

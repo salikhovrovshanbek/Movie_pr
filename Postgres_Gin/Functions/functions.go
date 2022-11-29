@@ -20,9 +20,15 @@ func CheckSERVERErr(err error, c *gin.Context) {
 	})
 }
 
-func SERVEROK(data interface{}, c *gin.Context) {
+func SERVEROKDATA(data interface{}, c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"ok":   true,
 		"data": data,
+	})
+}
+
+func SERVEROKAY(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"ok": true,
 	})
 }
