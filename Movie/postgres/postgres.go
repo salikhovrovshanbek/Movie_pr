@@ -23,7 +23,7 @@ type Postgres struct {
 	db *sqlx.DB
 }
 
-func (p Postgres) GetMovieBy(ctx context.Context) ([]structs.Movie, error) {
+func (p *Postgres) GetMovieBy(ctx context.Context) ([]structs.Movie, error) {
 	query := `SELECT * FROM movie;`
 
 	list := make([]structs.Movie, 0)
@@ -33,11 +33,16 @@ func (p Postgres) GetMovieBy(ctx context.Context) ([]structs.Movie, error) {
 	return list, nil
 }
 
-//	func (p Postgres) GetMovies(ctx context.Context, id string) ([]structs.Movie, error) {
-//		//TODO implement me
-//		panic("implement me")
-//	}
-func (p Postgres) CreateMovie(ctx context.Context, m structs.Movie) error {
+func (p *Postgres) GetAuthMovies(ctx context.Context, id string) ([]structs.Movie, error) {
+	query := `SELECT * FROM movies where authorid=$1;`
+
+	list := make([]structs.Movie, 0)
+	if err := p.db.SelectContext(ctx, &list, query, id); err != nil {
+		return []structs.Movie{}, err
+	}
+	return list, nil
+}
+func (p *Postgres) CreateMovie(ctx context.Context, m structs.Movie) error {
 	query := `INSERT INTO movie (id,title,author,auhtorid,publisheddata)
 			VALUES ($1,$2,$3,$4,$5)
 	`
@@ -52,7 +57,7 @@ func (p Postgres) CreateMovie(ctx context.Context, m structs.Movie) error {
 	return nil
 }
 
-func (p Postgres) CreateAuthor(ctx context.Context, a structs.Author) error {
+func (p *Postgres) CreateAuthor(ctx context.Context, a structs.Author) error {
 	query := `INSERT INTO author (id,name,genre,movies,birthdata,deathdata)
 			VALUES ($1,$2,$3,$4,$5,$6)
 	`

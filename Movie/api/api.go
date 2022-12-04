@@ -9,8 +9,9 @@ func InitRouter(s server.Server) *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/getmovie", s.GetMovieBy)
-	r.POST("/newmovie", s.CreateMovie)
-	r.POST("/newauth", s.CreateAuthor)
+	r.GET("/getauth/:id", s.GetAuthMovies)
+	r.GET("/newmovie", s.CreateMovie)
+	r.GET("/newauth", s.CreateAuthor)
 
 	return r
 }
