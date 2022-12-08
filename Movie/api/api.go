@@ -13,5 +13,15 @@ func InitRouter(s server.Server) *gin.Engine {
 	r.GET("/newmovie", s.CreateMovie)
 	r.GET("/newauth", s.CreateAuthor)
 
+	r.POST("/createmovie")
+	r.POST("/createauthor")
+	r.GET("/getmovie/:smth")
+	r.GET("/getmovies/:authid")
+	r.GET("/getauthors")
+	r.DELETE("/deletemovie/:id")
+	r.DELETE("/deleteauthor/:id")
+	r.PATCH("/updatemovie/:id")
+	r.PATCH("/updateauthor/:id")
+
 	return r
 }
