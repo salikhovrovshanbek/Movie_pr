@@ -9,9 +9,10 @@ type Repo interface {
 	GetMovieBy(ctx context.Context) ([]structs.Movie, error)
 	GetAuthMovies(ctx context.Context, id string) ([]structs.Movie, error)
 	CreateMovie(ctx context.Context, movie structs.Movie) error
-	CreateAuthor(ctx context.Context, author structs.Author) error
-	//UpdateMovie(ctx context.Context, id string) error
-	//UpdateAuthor(ctx context.Context, id string) error
-	//DeleteMovie(ctx context.Context, id string) error
-	//DeleteAuthor(ctx context.Context, id string) error
+	CreateActor(ctx context.Context) error
+	CreateDirector(ctx context.Context) error
+	UpdateMovie(ctx context.Context, id string) error
+	UpdateActor(ctx context.Context, id string) error
+	DeleteMovie(ctx context.Context, id string) error
+	DeleteAuthor(ctx context.Context, id string) error
 }
