@@ -22,19 +22,19 @@ func Connect(cfg Config) (*sqlx.DB, error) {
 		return nil, err
 	}
 
-	//driver, err := postgres.WithInstance(db.DB, &postgres.Config{})
-	//if err != nil {
-	//	return nil, err
-	//}
-	//
-	//m, err := migrate.NewWithDatabaseInstance(fmt.Sprintf("file://%s", cfg.PostgresMigrationsPath), "postgres", driver)
-	//if err != nil {
-	//	return nil, err
-	//}
-	//
-	//if err = m.Up(); err != nil && !errors.Is(err, migrate.ErrNoChange) {
-	//	return nil, err
-	//}
-
 	return db, nil
 }
+
+//driver, err := postgres.WithInstance(db.DB, &postgres.Config{})
+//if err != nil {
+//	return nil, err
+//}
+//
+//m, err := migrate.NewWithDatabaseInstance(fmt.Sprintf("file://%s", cfg.PostgresMigrationsPath), "postgres", driver)
+//if err != nil {
+//	return nil, err
+//}
+//
+//if err = m.Up(); err != nil && !errors.Is(err, migrate.ErrNoChange) {
+//	return nil, err
+//}

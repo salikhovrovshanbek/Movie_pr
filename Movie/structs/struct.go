@@ -6,20 +6,20 @@ import (
 )
 
 type Movie struct {
-	ID            int
-	Title         string
-	Author        string
-	AuthorID      int
-	PublishedData time.Time
+	ID            int       `json:"id"`
+	Title         string    `json:"title"`
+	Author        string    `json:"author"`
+	AuthorID      int       `json:"authorid"`
+	PublishedData time.Time `json:"publishedData"`
 }
 
 type Author struct {
-	ID        int
-	Name      string
-	Janr      string
-	Movies    []int
-	BirthData time.Time
-	DeathData time.Time
+	ID        int       `json:"id"`
+	Name      string    `json:"name"`
+	Janr      string    `json:"janr"`
+	Movies    []int     `json:"movies"`
+	BirthData time.Time `json:"birth_data"`
+	DeathData time.Time `json:"death_data"`
 }
 
 type Genres struct {
