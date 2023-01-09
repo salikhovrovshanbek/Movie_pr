@@ -183,14 +183,14 @@ func (p *Postgres) DeleteMovie(ctx context.Context, id uuid.UUID) error {
 	return er
 }
 
-func (p *Postgres) DeleteAuthor(ctx context.Context, id uuid.UUID) error {
-	query := `DELETE FROM auths
-		WHERE id=$1`
-
-	_, err := p.db.ExecContext(ctx, query, id)
-	er := Functions.CheckERR(err, "deleting  in postgres pkg")
-	return er
-}
+//func (p *Postgres) DeleteAuthor(ctx context.Context, id uuid.UUID) error {
+//	query := `DELETE FROM auths
+//		WHERE id=$1`
+//
+//	_, err := p.db.ExecContext(ctx, query, id)
+//	er := Functions.CheckERR(err, "deleting  in postgres pkg")
+//	return er
+//}
 
 func (p *Postgres) DeleteGenre(ctx context.Context, id uuid.UUID) error {
 	query := `DELETE FROM genres

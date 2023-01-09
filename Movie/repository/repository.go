@@ -14,7 +14,7 @@ type Repo interface {
 	CreateActor(ctx context.Context, s structs.Actors) error
 
 	GetMovies(ctx context.Context) ([]structs.Movies, error)
-	//GetAuthors(ctx context.Context)([]structs.Author,error)
+	//GetAuthors(ctx context.Context) ([]structs.Author, error)
 	GetGenres(ctx context.Context) ([]structs.Genres, error)
 	GetDirectors(ctx context.Context) ([]structs.Directors, error)
 	GetActors(ctx context.Context) ([]structs.Actors, error)
@@ -26,7 +26,7 @@ type Repo interface {
 	UpdateActor(ctx context.Context, actors structs.Actors) error
 
 	DeleteMovie(ctx context.Context, id uuid.UUID) error
-	DeleteAuthor(ctx context.Context, id uuid.UUID) error
+	//DeleteAuthor(ctx context.Context, id uuid.UUID) error
 	DeleteGenre(ctx context.Context, id uuid.UUID) error
 	DeleteDirector(ctx context.Context, id uuid.UUID) error
 	DeleteActor(ctx context.Context, id uuid.UUID) error

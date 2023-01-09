@@ -54,6 +54,13 @@ func (s Service) GetMovies(ctx context.Context) ([]structs.Movies, error) {
 	return str, nil
 }
 
+//func (s Service) GetAuthors(ctx context.Context) ([]structs.Author, error) {
+//	str, err := s.repo.GetAuthors(ctx)
+//	er := Functions.CheckERR(err, "getauth service")
+//	fmt.Println(er)
+//	return str, nil
+//}
+
 func (s Service) GetMovieBy(ctx context.Context) ([]structs.Movie, error) {
 	m, err := s.repo.GetMovieBy(ctx)
 	if err != nil {
@@ -106,7 +113,7 @@ func (s Service) UpdateMovie(ctx context.Context, str structs.Movies) error {
 //	return nil
 //}
 
-func (s Service) UpdateGenres(ctx context.Context, str structs.Genres) error {
+func (s Service) UpdateGenre(ctx context.Context, str structs.Genres) error {
 	if err := s.repo.UpdateGenre(ctx, str); err != nil {
 		er := Functions.CheckERR(err, "while updating in service pkg")
 		return er
@@ -114,7 +121,7 @@ func (s Service) UpdateGenres(ctx context.Context, str structs.Genres) error {
 	return nil
 }
 
-func (s Service) UpdateDirectors(ctx context.Context, str structs.Directors) error {
+func (s Service) UpdateDirector(ctx context.Context, str structs.Directors) error {
 	if err := s.repo.UpdateDirector(ctx, str); err != nil {
 		er := Functions.CheckERR(err, "while updating in service pkg")
 		return er
@@ -122,7 +129,7 @@ func (s Service) UpdateDirectors(ctx context.Context, str structs.Directors) err
 	return nil
 }
 
-func (s Service) UpdateActors(ctx context.Context, str structs.Actors) error {
+func (s Service) UpdateActor(ctx context.Context, str structs.Actors) error {
 	if err := s.repo.UpdateActor(ctx, str); err != nil {
 		er := Functions.CheckERR(err, "while updating in service pkg")
 		return er
@@ -138,13 +145,13 @@ func (s Service) DeleteMovie(ctx context.Context, id uuid.UUID) error {
 	return nil
 }
 
-func (s Service) DeleteAuthor(ctx context.Context, id uuid.UUID) error {
-	if err := s.repo.DeleteAuthor(ctx, id); err != nil {
-		er := Functions.CheckERR(err, "deleting methods in service pkg")
-		return er
-	}
-	return nil
-}
+//func (s Service) DeleteAuthor(ctx context.Context, id uuid.UUID) error {
+//	if err := s.repo.DeleteAuthor(ctx, id); err != nil {
+//		er := Functions.CheckERR(err, "deleting methods in service pkg")
+//		return er
+//	}
+//	return nil
+//}
 
 func (s Service) DeleteGenre(ctx context.Context, id uuid.UUID) error {
 	if err := s.repo.DeleteGenre(ctx, id); err != nil {

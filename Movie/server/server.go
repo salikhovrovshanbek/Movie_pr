@@ -5,6 +5,7 @@ import (
 	"Postgres_Gin/service"
 	"Postgres_Gin/structs"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"net/http"
 )
 
@@ -17,6 +18,8 @@ func New(service2 service.Service) Server {
 		svc: service2,
 	}
 }
+
+// 					CREATE
 
 func (s Server) CreateMovie(c *gin.Context) {
 	var m structs.Movies
@@ -33,6 +36,22 @@ func (s Server) CreateMovie(c *gin.Context) {
 	Functions.SERVEROKAY(c)
 	return
 }
+
+//func (s Server) CreateAuthor(c *gin.Context) {
+//	var a structs.Author
+//
+//	if err := c.ShouldBindJSON(a); err != nil {
+//		Functions.CheckERR(err)
+//		return
+//	}
+//
+//	if err := s.svc.CreateAuthor(c); err != nil {
+//		Functions.CheckSERVERErr(err, c)
+//		return
+//	}
+//
+//	Functions.SERVEROKAY(c)
+//}
 
 func (s Server) CreateGenre(c *gin.Context) {
 	var m structs.Genres
@@ -82,14 +101,14 @@ func (s Server) CreateActor(c *gin.Context) {
 	return
 }
 
-func (s Server) GetMovies(c *gin.Context) ([]structs.Movies, error) {
+//					GET
+
+func (s Server) GetMovies(c *gin.Context) {
 	str, err := s.svc.GetMovies(c)
 	if err != nil {
 		Functions.CheckSERVERErr(err, c)
-		return []structs.Movies{}, err
 	}
 	Functions.SERVEROKDATA(str, c)
-	return str, nil
 }
 
 func (s Server) GetMovieBy(c *gin.Context) {
@@ -102,7 +121,151 @@ func (s Server) GetMovieBy(c *gin.Context) {
 	Functions.SERVEROKDATA(m, c)
 }
 
+//func (s Server) GetAuthors(c *gin.Context) {
+//	str, err := s.svc.GetAuthors(c)
+//	if err != nil {
+//		Functions.CheckSERVERErr(err, c)
+//	}
+//	Functions.SERVEROKDATA(str, c)
 //
+//}
+
+func (s Server) GetGenres(c *gin.Context) {
+	str, err := s.svc.GetGenres(c)
+	if err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKDATA(str, c)
+
+}
+
+func (s Server) GetDirectors(c *gin.Context) {
+	str, err := s.svc.GetDirectors(c)
+	if err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKDATA(str, c)
+
+}
+
+func (s Server) GetActors(c *gin.Context) {
+	str, err := s.svc.GetActors(c)
+	if err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKDATA(str, c)
+
+}
+
+//					UPDATE
+
+func (s Server) UpdateMovie(c *gin.Context) {
+	var str structs.Movies
+	if err := c.ShouldBindJSON(str); err != nil {
+		Functions.CheckERROR(err, "Updating methods in server pkg")
+	}
+	err := s.svc.UpdateMovie(c, str)
+	if err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKAY(c)
+}
+
+//func (s Server) UpdateAuhtor(c *gin.Context)  {
+//	var str structs.Author
+//	if err:=c.ShouldBindJSON(str);err!=nil{
+//		Functions.CheckERROR(err,"Updating methods in server pkg")
+//	}
+//	err:=s.svc.UpdateAuthor(c,str)
+//	if err!=nil{
+//		Functions.CheckSERVERErr(err,c)
+//	}
+//	Functions.SERVEROKAY(c)
+//}
+
+func (s Server) UpdateGenre(c *gin.Context) {
+	var str structs.Genres
+	if err := c.ShouldBindJSON(str); err != nil {
+		Functions.CheckERROR(err, "Updating methods in server pkg")
+	}
+	err := s.svc.UpdateGenre(c, str)
+	if err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKAY(c)
+}
+
+func (s Server) UpdateDirector(c *gin.Context) {
+	var str structs.Directors
+	if err := c.ShouldBindJSON(str); err != nil {
+		Functions.CheckERROR(err, "Updating methods in server pkg")
+	}
+	err := s.svc.UpdateDirector(c, str)
+	if err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKAY(c)
+}
+
+func (s Server) UpdateActor(c *gin.Context) {
+	var str structs.Actors
+	if err := c.ShouldBindJSON(str); err != nil {
+		Functions.CheckERROR(err, "Updating methods in server pkg")
+	}
+	err := s.svc.UpdateActor(c, str)
+	if err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKAY(c)
+}
+
+// 					DELETE
+
+func (s Server) DeleteMovie(c *gin.Context) {
+	//id:=c.Param("id")
+	id := uuid.New()
+	if err := s.svc.DeleteMovie(c, id); err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKAY(c)
+}
+
+//func (s Server) DeleteAuthor(c *gin.Context)  {
+//	//id:=c.Param("id")
+//	id:=uuid.New()
+//	if err:=s.svc.DeleteAuthor(c,id);err!=nil{
+//		Functions.CheckSERVERErr(err,c)
+//	}
+//	Functions.SERVEROKAY(c)
+//}
+
+func (s Server) DeleteGenre(c *gin.Context) {
+	//id:=c.Param("id")
+	id := uuid.New()
+	if err := s.svc.DeleteGenre(c, id); err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKAY(c)
+}
+
+func (s Server) DeleteDirector(c *gin.Context) {
+	//id:=c.Param("id")
+	id := uuid.New()
+	if err := s.svc.DeleteDirector(c, id); err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKAY(c)
+}
+
+func (s Server) DeleteActor(c *gin.Context) {
+	//id:=c.Param("id")
+	id := uuid.New()
+	if err := s.svc.DeleteActor(c, id); err != nil {
+		Functions.CheckSERVERErr(err, c)
+	}
+	Functions.SERVEROKAY(c)
+}
+
 //func (s Server) GetAuthMovies(c *gin.Context) {
 //	id := c.Param("id")
 //
@@ -113,36 +276,4 @@ func (s Server) GetMovieBy(c *gin.Context) {
 //
 //	}
 //	Functions.SERVEROKDATA(m, c)
-//}
-//
-//func (s Server) CreateMovie(c *gin.Context) {
-//	var m structs.Movie
-//
-//	if err := c.ShouldBindJSON(m); err != nil {
-//		Functions.CheckERR(err)
-//		return
-//	}
-//
-//	if err := s.svc.CreateMovie(c, m); err != nil {
-//		Functions.CheckSERVERErr(err, c)
-//		return
-//	}
-//
-//	Functions.SERVEROKAY(c)
-//}
-//
-//func (s Server) CreateAuthor(c *gin.Context) {
-//	var a structs.Author
-//
-//	if err := c.ShouldBindJSON(a); err != nil {
-//		Functions.CheckERR(err)
-//		return
-//	}
-//
-//	if err := s.svc.CreateAuthor(c); err != nil {
-//		Functions.CheckSERVERErr(err, c)
-//		return
-//	}
-//
-//	Functions.SERVEROKAY(c)
 //}
