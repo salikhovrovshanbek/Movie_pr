@@ -3,6 +3,7 @@ package repository
 import (
 	"Postgres_Gin/structs"
 	"context"
+	"github.com/google/uuid"
 )
 
 type Repo interface {
@@ -24,11 +25,11 @@ type Repo interface {
 	UpdateDirector(ctx context.Context, directors structs.Directors) error
 	UpdateActor(ctx context.Context, actors structs.Actors) error
 
-	DeleteMovie(ctx context.Context) error
-	//DeleteAuthor(ctx context.Context)error
-	DeleteGenre(ctx context.Context) error
-	DeleteDirector(ctx context.Context) error
-	DeleteActor(ctx context.Context) error
+	DeleteMovie(ctx context.Context, id uuid.UUID) error
+	DeleteAuthor(ctx context.Context, id uuid.UUID) error
+	DeleteGenre(ctx context.Context, id uuid.UUID) error
+	DeleteDirector(ctx context.Context, id uuid.UUID) error
+	DeleteActor(ctx context.Context, id uuid.UUID) error
 
 	GetMovieBy(ctx context.Context) ([]structs.Movie, error)
 	//GetAuthMovies(ctx context.Context, id string) ([]structs.Movie, error)

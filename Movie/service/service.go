@@ -6,6 +6,7 @@ import (
 	"Postgres_Gin/structs"
 	"context"
 	"fmt"
+	"github.com/google/uuid"
 )
 
 type Service struct {
@@ -60,6 +61,113 @@ func (s Service) GetMovieBy(ctx context.Context) ([]structs.Movie, error) {
 	}
 	fmt.Println(m)
 	return m, nil
+}
+
+func (s Service) GetGenres(ctx context.Context) ([]structs.Genres, error) {
+	str, err := s.repo.GetGenres(ctx)
+	if err != nil {
+		er := Functions.CheckERR(err, "get methods in service")
+		return []structs.Genres{}, er
+	}
+	return str, nil
+}
+
+func (s Service) GetDirectors(ctx context.Context) ([]structs.Directors, error) {
+	str, err := s.repo.GetDirectors(ctx)
+	if err != nil {
+		er := Functions.CheckERR(err, "get methods in service")
+		return []structs.Directors{}, er
+	}
+	return str, nil
+}
+
+func (s Service) GetActors(ctx context.Context) ([]structs.Actors, error) {
+	str, err := s.repo.GetActors(ctx)
+	if err != nil {
+		er := Functions.CheckERR(err, "get methods in service")
+		return []structs.Actors{}, er
+	}
+	return str, nil
+}
+
+func (s Service) UpdateMovie(ctx context.Context, str structs.Movies) error {
+	if err := s.repo.UpdateMovie(ctx, str); err != nil {
+		er := Functions.CheckERR(err, "while updating in service pkg")
+		return er
+	}
+	return nil
+}
+
+//func (s Service) UpdateAuthor(ctx context.Context,str structs.Author) error {
+//	if err:=s.repo.UpdateAuthor(ctx,str);err!=nil{
+//		er:=Functions.CheckERR(err,"while updating in service pkg")
+//		return er
+//	}
+//	return nil
+//}
+
+func (s Service) UpdateGenres(ctx context.Context, str structs.Genres) error {
+	if err := s.repo.UpdateGenre(ctx, str); err != nil {
+		er := Functions.CheckERR(err, "while updating in service pkg")
+		return er
+	}
+	return nil
+}
+
+func (s Service) UpdateDirectors(ctx context.Context, str structs.Directors) error {
+	if err := s.repo.UpdateDirector(ctx, str); err != nil {
+		er := Functions.CheckERR(err, "while updating in service pkg")
+		return er
+	}
+	return nil
+}
+
+func (s Service) UpdateActors(ctx context.Context, str structs.Actors) error {
+	if err := s.repo.UpdateActor(ctx, str); err != nil {
+		er := Functions.CheckERR(err, "while updating in service pkg")
+		return er
+	}
+	return nil
+}
+
+func (s Service) DeleteMovie(ctx context.Context, id uuid.UUID) error {
+	if err := s.repo.DeleteMovie(ctx, id); err != nil {
+		er := Functions.CheckERR(err, "deleting methods in service pkg")
+		return er
+	}
+	return nil
+}
+
+func (s Service) DeleteAuthor(ctx context.Context, id uuid.UUID) error {
+	if err := s.repo.DeleteAuthor(ctx, id); err != nil {
+		er := Functions.CheckERR(err, "deleting methods in service pkg")
+		return er
+	}
+	return nil
+}
+
+func (s Service) DeleteGenre(ctx context.Context, id uuid.UUID) error {
+	if err := s.repo.DeleteGenre(ctx, id); err != nil {
+		er := Functions.CheckERR(err, "deleting methods in service pkg")
+		return er
+	}
+	return nil
+}
+
+func (s Service) DeleteDirector(ctx context.Context, id uuid.UUID) error {
+	if err := s.repo.DeleteDirector(ctx, id); err != nil {
+		er := Functions.CheckERR(err, "deleting methods in service pkg")
+		return er
+	}
+	return nil
+}
+
+func (s Service) DeleteActor(ctx context.Context, id uuid.UUID) error {
+	if err := s.repo.DeleteActor(ctx, id); err != nil {
+		er := Functions.CheckERR(err, "deleting methods in service pkg")
+		return er
+	}
+	return nil
 }
 
 //
