@@ -73,7 +73,7 @@ func (p *Postgres) GetMovies(ctx context.Context) ([]structs.Movies, error) {
 	query := `SELECT * FROM movies`
 
 	var list []structs.Movies
-	if err := p.db.GetContext(ctx, &list, query); err != nil {
+	if err := p.db.SelectContext(ctx, &list, query); err != nil {
 		log.Fatalln("getmoives postgres ", err.Error())
 	}
 	return list, nil
@@ -88,7 +88,7 @@ func (p *Postgres) GetGenres(ctx context.Context) ([]structs.Genres, error) {
 	query := `SELECT * FROM genres`
 
 	var list []structs.Genres
-	if err := p.db.GetContext(ctx, &list, query); err != nil {
+	if err := p.db.SelectContext(ctx, &list, query); err != nil {
 		log.Fatalln("getgenres postgres ", err.Error())
 	}
 	return list, nil
@@ -98,17 +98,17 @@ func (p *Postgres) GetDirectors(ctx context.Context) ([]structs.Directors, error
 	query := `SELECT * FROM directors`
 
 	var list []structs.Directors
-	if err := p.db.GetContext(ctx, &list, query); err != nil {
+	if err := p.db.SelectContext(ctx, &list, query); err != nil {
 		log.Fatalln("getdirectors postgres ", err.Error())
 	}
 	return list, nil
 }
 
 func (p *Postgres) GetActors(ctx context.Context) ([]structs.Actors, error) {
-	query := `SELECT * FROM actors`
+	query := `SELECT * FROM actor`
 
 	var list []structs.Actors
-	if err := p.db.GetContext(ctx, &list, query); err != nil {
+	if err := p.db.SelectContext(ctx, &list, query); err != nil {
 		log.Fatalln("getactors postgres ", err.Error())
 	}
 	return list, nil
@@ -163,7 +163,7 @@ func (p *Postgres) UpdateDirector(ctx context.Context, s structs.Directors) erro
 
 func (p *Postgres) UpdateActor(ctx context.Context, s structs.Actors) error {
 	query := `
-	UPDATE  actors
+	UPDATE  actor
 		SET	firstname=$1, lastname=$2, nationality=$3, birth=$4
 	WHERE id=$5
 	`
@@ -209,7 +209,7 @@ func (p *Postgres) DeleteDirector(ctx context.Context, id uuid.UUID) error {
 }
 
 func (p *Postgres) DeleteActor(ctx context.Context, id uuid.UUID) error {
-	query := `DELETE FROM actors
+	query := `DELETE FROM actor
            WHERE id=$1`
 	_, err := p.db.ExecContext(ctx, query, id)
 	er := Functions.CheckERR(err, "deleting  in postgres pkg")
