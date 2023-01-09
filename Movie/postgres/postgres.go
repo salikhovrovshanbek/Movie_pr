@@ -5,7 +5,6 @@ import (
 	"Postgres_Gin/structs"
 	"context"
 	"fmt"
-	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 	"log"
@@ -175,7 +174,7 @@ func (p *Postgres) UpdateActor(ctx context.Context, s structs.Actors) error {
 	return er
 }
 
-func (p *Postgres) DeleteMovie(ctx context.Context, id uuid.UUID) error {
+func (p *Postgres) DeleteMovie(ctx context.Context, id string) error {
 	query := `DELETE FROM movies
            WHERE id=$1`
 	_, err := p.db.ExecContext(ctx, query, id)
@@ -183,7 +182,7 @@ func (p *Postgres) DeleteMovie(ctx context.Context, id uuid.UUID) error {
 	return er
 }
 
-//func (p *Postgres) DeleteAuthor(ctx context.Context, id uuid.UUID) error {
+//func (p *Postgres) DeleteAuthor(ctx context.Context, id string) error {
 //	query := `DELETE FROM auths
 //		WHERE id=$1`
 //
@@ -192,7 +191,7 @@ func (p *Postgres) DeleteMovie(ctx context.Context, id uuid.UUID) error {
 //	return er
 //}
 
-func (p *Postgres) DeleteGenre(ctx context.Context, id uuid.UUID) error {
+func (p *Postgres) DeleteGenre(ctx context.Context, id string) error {
 	query := `DELETE FROM genres
            WHERE id=$1`
 	_, err := p.db.ExecContext(ctx, query, id)
@@ -200,7 +199,7 @@ func (p *Postgres) DeleteGenre(ctx context.Context, id uuid.UUID) error {
 	return er
 }
 
-func (p *Postgres) DeleteDirector(ctx context.Context, id uuid.UUID) error {
+func (p *Postgres) DeleteDirector(ctx context.Context, id string) error {
 	query := `DELETE FROM directors
            WHERE id=$1`
 	_, err := p.db.ExecContext(ctx, query, id)
@@ -208,7 +207,7 @@ func (p *Postgres) DeleteDirector(ctx context.Context, id uuid.UUID) error {
 	return er
 }
 
-func (p *Postgres) DeleteActor(ctx context.Context, id uuid.UUID) error {
+func (p *Postgres) DeleteActor(ctx context.Context, id string) error {
 	query := `DELETE FROM actor
            WHERE id=$1`
 	_, err := p.db.ExecContext(ctx, query, id)

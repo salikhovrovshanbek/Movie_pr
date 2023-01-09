@@ -5,7 +5,6 @@ import (
 	"Postgres_Gin/service"
 	"Postgres_Gin/structs"
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 	"net/http"
 )
 
@@ -222,8 +221,8 @@ func (s Server) UpdateActor(c *gin.Context) {
 // 					DELETE
 
 func (s Server) DeleteMovie(c *gin.Context) {
-	//id:=c.Param("id")
-	id := uuid.New()
+	id := c.Param("id")
+
 	if err := s.svc.DeleteMovie(c, id); err != nil {
 		Functions.CheckSERVERErr(err, c)
 	}
@@ -231,8 +230,7 @@ func (s Server) DeleteMovie(c *gin.Context) {
 }
 
 //func (s Server) DeleteAuthor(c *gin.Context)  {
-//	//id:=c.Param("id")
-//	id:=uuid.New()
+//id:=c.Param("id")
 //	if err:=s.svc.DeleteAuthor(c,id);err!=nil{
 //		Functions.CheckSERVERErr(err,c)
 //	}
@@ -240,8 +238,8 @@ func (s Server) DeleteMovie(c *gin.Context) {
 //}
 
 func (s Server) DeleteGenre(c *gin.Context) {
-	//id:=c.Param("id")
-	id := uuid.New()
+	id := c.Param("id")
+
 	if err := s.svc.DeleteGenre(c, id); err != nil {
 		Functions.CheckSERVERErr(err, c)
 	}
@@ -249,8 +247,8 @@ func (s Server) DeleteGenre(c *gin.Context) {
 }
 
 func (s Server) DeleteDirector(c *gin.Context) {
-	//id:=c.Param("id")
-	id := uuid.New()
+	id := c.Param("id")
+
 	if err := s.svc.DeleteDirector(c, id); err != nil {
 		Functions.CheckSERVERErr(err, c)
 	}
@@ -258,8 +256,8 @@ func (s Server) DeleteDirector(c *gin.Context) {
 }
 
 func (s Server) DeleteActor(c *gin.Context) {
-	//id:=c.Param("id")
-	id := uuid.New()
+	id := c.Param("id")
+
 	if err := s.svc.DeleteActor(c, id); err != nil {
 		Functions.CheckSERVERErr(err, c)
 	}

@@ -20,6 +20,7 @@ func New(repo repository.Repo) Service {
 }
 
 func (s Service) CreateMovie(ctx context.Context, m structs.Movies) error {
+	m.ID = uuid.New()
 	if err := s.repo.CreateMovie(ctx, m); err != nil {
 		return err
 	}
@@ -27,6 +28,7 @@ func (s Service) CreateMovie(ctx context.Context, m structs.Movies) error {
 }
 
 func (s Service) CreateGenre(ctx context.Context, g structs.Genres) error {
+	g.ID = uuid.New()
 	if err := s.repo.CreateGenre(ctx, g); err != nil {
 		return err
 	}
@@ -34,6 +36,7 @@ func (s Service) CreateGenre(ctx context.Context, g structs.Genres) error {
 }
 
 func (s Service) CreateDirector(ctx context.Context, d structs.Directors) error {
+	d.ID = uuid.New()
 	if err := s.repo.CreateDirector(ctx, d); err != nil {
 		return err
 	}
@@ -41,6 +44,7 @@ func (s Service) CreateDirector(ctx context.Context, d structs.Directors) error 
 }
 
 func (s Service) CreateActor(ctx context.Context, a structs.Actors) error {
+	a.ID = uuid.New()
 	if err := s.repo.CreateActor(ctx, a); err != nil {
 		return err
 	}
@@ -137,7 +141,7 @@ func (s Service) UpdateActor(ctx context.Context, str structs.Actors) error {
 	return nil
 }
 
-func (s Service) DeleteMovie(ctx context.Context, id uuid.UUID) error {
+func (s Service) DeleteMovie(ctx context.Context, id string) error {
 	if err := s.repo.DeleteMovie(ctx, id); err != nil {
 		er := Functions.CheckERR(err, "deleting methods in service pkg")
 		return er
@@ -145,7 +149,7 @@ func (s Service) DeleteMovie(ctx context.Context, id uuid.UUID) error {
 	return nil
 }
 
-//func (s Service) DeleteAuthor(ctx context.Context, id uuid.UUID) error {
+//func (s Service) DeleteAuthor(ctx context.Context, id string) error {
 //	if err := s.repo.DeleteAuthor(ctx, id); err != nil {
 //		er := Functions.CheckERR(err, "deleting methods in service pkg")
 //		return er
@@ -153,7 +157,7 @@ func (s Service) DeleteMovie(ctx context.Context, id uuid.UUID) error {
 //	return nil
 //}
 
-func (s Service) DeleteGenre(ctx context.Context, id uuid.UUID) error {
+func (s Service) DeleteGenre(ctx context.Context, id string) error {
 	if err := s.repo.DeleteGenre(ctx, id); err != nil {
 		er := Functions.CheckERR(err, "deleting methods in service pkg")
 		return er
@@ -161,7 +165,7 @@ func (s Service) DeleteGenre(ctx context.Context, id uuid.UUID) error {
 	return nil
 }
 
-func (s Service) DeleteDirector(ctx context.Context, id uuid.UUID) error {
+func (s Service) DeleteDirector(ctx context.Context, id string) error {
 	if err := s.repo.DeleteDirector(ctx, id); err != nil {
 		er := Functions.CheckERR(err, "deleting methods in service pkg")
 		return er
@@ -169,7 +173,7 @@ func (s Service) DeleteDirector(ctx context.Context, id uuid.UUID) error {
 	return nil
 }
 
-func (s Service) DeleteActor(ctx context.Context, id uuid.UUID) error {
+func (s Service) DeleteActor(ctx context.Context, id string) error {
 	if err := s.repo.DeleteActor(ctx, id); err != nil {
 		er := Functions.CheckERR(err, "deleting methods in service pkg")
 		return er
