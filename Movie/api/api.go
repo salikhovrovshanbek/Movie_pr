@@ -9,11 +9,11 @@ import (
 func InitRouter(s server.Server) *gin.Engine {
 	r := gin.Default()
 
-	r.POST("/movie")
+	r.POST("/movie", s.CreateMovie)
 	//r.POST("/author")
-	r.POST("/genre")
-	r.POST("/director")
-	r.POST("/actor")
+	r.POST("/genre", s.CreateGenre)
+	r.POST("/director", s.CreateDirector)
+	r.POST("/actor", s.CreateActor)
 
 	r.GET("/movie")
 	//r.GET("/authors")

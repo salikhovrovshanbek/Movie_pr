@@ -41,7 +41,7 @@ func (p *Postgres) CreateMovie(ctx context.Context, s structs.Movies) error {
 //	panic("implement me")
 //}
 
-func (p Postgres) CreateGenre(ctx context.Context, s structs.Genres) error {
+func (p *Postgres) CreateGenre(ctx context.Context, s structs.Genres) error {
 	query := `INSERT INTO genres(id,genrename)
 					VALUES ($1,$2)`
 
@@ -50,7 +50,7 @@ func (p Postgres) CreateGenre(ctx context.Context, s structs.Genres) error {
 	return er
 }
 
-func (p Postgres) CreateDirector(ctx context.Context, s structs.Directors) error {
+func (p *Postgres) CreateDirector(ctx context.Context, s structs.Directors) error {
 	query := `INSERT INTO directors(id,firtsname,lastname,nationality,birth)
 					VALUES ($1,$2,$3,$4,$5)`
 
@@ -59,7 +59,7 @@ func (p Postgres) CreateDirector(ctx context.Context, s structs.Directors) error
 	return er
 }
 
-func (p Postgres) CreateActor(ctx context.Context, s structs.Actors) error {
+func (p *Postgres) CreateActor(ctx context.Context, s structs.Actors) error {
 	query := `INSERT INTO actor(id,firtsname,lastname,nationality,birth)
 					VALUES ($1,$2,$3,$4,$5)`
 
@@ -68,82 +68,106 @@ func (p Postgres) CreateActor(ctx context.Context, s structs.Actors) error {
 	return er
 }
 
-func (p Postgres) GetMovies(ctx context.Context) ([]structs.Movies, error) {
+func (p *Postgres) GetMovies(ctx context.Context) ([]structs.Movies, error) {
 	query := `SELECT * FROM movies`
 
 	var list []structs.Movies
-	if err := p.db.SelectContext(ctx, &list, query); err != nil {
+	if err := p.db.GetContext(ctx, &list, query); err != nil {
 		log.Fatalln("getmoives postgres ", err.Error())
 	}
 	return list, nil
 }
 
-//func (p Postgres) GetAuthors(ctx context.Context) ([]structs.Author, error) {
+//func (p *Postgres) GetAuthors(ctx context.Context) ([]structs.Author, error) {
 //	//TODO implement me
 //	panic("implement me")
 //}
 
-func (p Postgres) GetGenres(ctx context.Context) ([]structs.Genres, error) {
-	//TODO implement me
-	panic("implement me")
+func (p *Postgres) GetGenres(ctx context.Context) ([]structs.Genres, error) {
+	query := `SELECT * FROM genres`
+
+	var list []structs.Genres
+	if err := p.db.GetContext(ctx, &list, query); err != nil {
+		log.Fatalln("getgenres postgres ", err.Error())
+	}
+	return list, nil
 }
 
-func (p Postgres) GetDirectors(ctx context.Context) ([]structs.Directors, error) {
-	//TODO implement me
-	panic("implement me")
+func (p *Postgres) GetDirectors(ctx context.Context) ([]structs.Directors, error) {
+	query := `SELECT * FROM directors`
+
+	var list []structs.Directors
+	if err := p.db.GetContext(ctx, &list, query); err != nil {
+		log.Fatalln("getdirectors postgres ", err.Error())
+	}
+	return list, nil
 }
 
-func (p Postgres) GetActors(ctx context.Context) ([]structs.Actors, error) {
-	//TODO implement me
-	panic("implement me")
+func (p *Postgres) GetActors(ctx context.Context) ([]structs.Actors, error) {
+	query := `SELECT * FROM actors`
+
+	var list []structs.Actors
+	if err := p.db.GetContext(ctx, &list, query); err != nil {
+		log.Fatalln("getactors postgres ", err.Error())
+	}
+	return list, nil
 }
 
-func (p Postgres) UpdateMovie(ctx context.Context, movie structs.Movie) error {
-	//TODO implement me
-	panic("implement me")
+func (p *Postgres) UpdateMovie(ctx context.Context, m structs.Movies) error {
+	query := `
+	UPDATE movies 
+		SET directorid=$1,genreid=$2,title=$3,releaseyear=$4,rating=$5,plot=$6,movielength=$7
+	WHERE id=$8			
+	`
+	_, err := p.db.ExecContext(
+		ctx, query,
+		m.DirectorID, m.GenreID, m.Title, m.ReleaseYear, m.Rating, m.Plot, m.MovieLength, m.ID,
+	)
+	er := Functions.CheckERR(err, "while executing updatemovie postgres pkg")
+	return er
 }
 
-//func (p Postgres) UpdateAuthor(ctx context.Context, author structs.Author) error {
+//func (p *Postgres) UpdateAuthor(ctx context.Context, author structs.Author) error {
 //	//TODO implement me
 //	panic("implement me")
 //}
 
-func (p Postgres) UpdateGenre(ctx context.Context, genres structs.Genres) error {
+func (p *Postgres) UpdateGenre(ctx context.Context, genres structs.Genres) error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (p Postgres) UpdateDirector(ctx context.Context, directors structs.Directors) error {
+func (p *Postgres) UpdateDirector(ctx context.Context, directors structs.Directors) error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (p Postgres) UpdateActor(ctx context.Context, actors structs.Actors) error {
+func (p *Postgres) UpdateActor(ctx context.Context, actors structs.Actors) error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (p Postgres) DeleteMovie(ctx context.Context) error {
+func (p *Postgres) DeleteMovie(ctx context.Context) error {
 	//TODO implement me
 	panic("implement me")
 }
 
-//func (p Postgres) DeleteAuthor(ctx context.Context) error {
+//func (p *Postgres) DeleteAuthor(ctx context.Context) error {
 //	//TODO implement me
 //	panic("implement me")
 //}
 
-func (p Postgres) DeleteGenre(ctx context.Context) error {
+func (p *Postgres) DeleteGenre(ctx context.Context) error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (p Postgres) DeleteDirector(ctx context.Context) error {
+func (p *Postgres) DeleteDirector(ctx context.Context) error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (p Postgres) DeleteActor(ctx context.Context) error {
+func (p *Postgres) DeleteActor(ctx context.Context) error {
 	//TODO implement me
 	panic("implement me")
 }

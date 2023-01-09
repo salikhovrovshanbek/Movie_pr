@@ -39,3 +39,11 @@ func SERVEROKAY(c *gin.Context) {
 		"ok": true,
 	})
 }
+
+//
+//func CheckSERVERBodyErr(err error,a int, c *gin.Context) {
+//	c.JSON(http.StatusInternalServerError, gin.H{
+//		"ok":    false,
+//		"error": err,
+//	})
+//}

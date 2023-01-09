@@ -18,7 +18,7 @@ type Repo interface {
 	GetDirectors(ctx context.Context) ([]structs.Directors, error)
 	GetActors(ctx context.Context) ([]structs.Actors, error)
 
-	UpdateMovie(ctx context.Context, movie structs.Movie) error
+	UpdateMovie(ctx context.Context, movie structs.Movies) error
 	//UpdateAuthor(ctx context.Context,author structs.Author)error
 	UpdateGenre(ctx context.Context, genres structs.Genres) error
 	UpdateDirector(ctx context.Context, directors structs.Directors) error

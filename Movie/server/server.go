@@ -3,7 +3,9 @@ package server
 import (
 	"Postgres_Gin/Functions"
 	"Postgres_Gin/service"
+	"Postgres_Gin/structs"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type Server struct {
@@ -14,6 +16,80 @@ func New(service2 service.Service) Server {
 	return Server{
 		svc: service2,
 	}
+}
+
+func (s Server) CreateMovie(c *gin.Context) {
+	var m structs.Movies
+	if err := c.ShouldBindJSON(m); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"ok":    false,
+			"error": err,
+		})
+	}
+	if err := s.svc.CreateMovie(c, m); err != nil {
+		Functions.CheckSERVERErr(err, c)
+		return
+	}
+	Functions.SERVEROKAY(c)
+	return
+}
+
+func (s Server) CreateGenre(c *gin.Context) {
+	var m structs.Genres
+	if err := c.ShouldBindJSON(m); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"ok":    false,
+			"error": err,
+		})
+	}
+	if err := s.svc.CreateGenre(c, m); err != nil {
+		Functions.CheckSERVERErr(err, c)
+		return
+	}
+	Functions.SERVEROKAY(c)
+	return
+}
+
+func (s Server) CreateDirector(c *gin.Context) {
+	var m structs.Directors
+	if err := c.ShouldBindJSON(m); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"ok":    false,
+			"error": err,
+		})
+	}
+	if err := s.svc.CreateDirector(c, m); err != nil {
+		Functions.CheckSERVERErr(err, c)
+		return
+	}
+	Functions.SERVEROKAY(c)
+	return
+}
+
+func (s Server) CreateActor(c *gin.Context) {
+	var m structs.Actors
+	if err := c.ShouldBindJSON(m); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"ok":    false,
+			"error": err,
+		})
+	}
+	if err := s.svc.CreateActor(c, m); err != nil {
+		Functions.CheckSERVERErr(err, c)
+		return
+	}
+	Functions.SERVEROKAY(c)
+	return
+}
+
+func (s Server) GetMovies(c *gin.Context) ([]structs.Movies, error) {
+	str, err := s.svc.GetMovies(c)
+	if err != nil {
+		Functions.CheckSERVERErr(err, c)
+		return []structs.Movies{}, err
+	}
+	Functions.SERVEROKDATA(str, c)
+	return str, nil
 }
 
 func (s Server) GetMovieBy(c *gin.Context) {

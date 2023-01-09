@@ -1,6 +1,7 @@
 package service
 
 import (
+	"Postgres_Gin/Functions"
 	"Postgres_Gin/repository"
 	"Postgres_Gin/structs"
 	"context"
@@ -17,40 +18,40 @@ func New(repo repository.Repo) Service {
 	}
 }
 
-func (s Service) CreateMovie(ctx context.Context,m structs.Movies) error {
-	if err:=s.repo.CreateMovie(ctx,m);err!=nil{
+func (s Service) CreateMovie(ctx context.Context, m structs.Movies) error {
+	if err := s.repo.CreateMovie(ctx, m); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (s Service) CreateGenre(ctx context.Context,g structs.Genres) error {
-	if err:=s.repo.CreateGenre(ctx,g);err!=nil{
+func (s Service) CreateGenre(ctx context.Context, g structs.Genres) error {
+	if err := s.repo.CreateGenre(ctx, g); err != nil {
 		return err
 	}
-
+	return nil
 }
 
-func (s Service) CreateDirector(ctx context.Context,d structs.Directors) error {
-	if err:=s.repo.Create();err!=nil{
+func (s Service) CreateDirector(ctx context.Context, d structs.Directors) error {
+	if err := s.repo.CreateDirector(ctx, d); err != nil {
 		return err
 	}
-
+	return nil
 }
 
-func (s Service) CreateActor(ctx context.Context,a structs.Actors) error {
-	if err:=s.repo.Create();err!=nil{
+func (s Service) CreateActor(ctx context.Context, a structs.Actors) error {
+	if err := s.repo.CreateActor(ctx, a); err != nil {
 		return err
 	}
-
+	return nil
 }
 
-func (s Service) Create(ctx context.Context,structs.) error {
-
+func (s Service) GetMovies(ctx context.Context) ([]structs.Movies, error) {
+	str, err := s.repo.GetMovies(ctx)
+	er := Functions.CheckERR(err, "getmovie service")
+	fmt.Println(er)
+	return str, nil
 }
-
-
-
 
 func (s Service) GetMovieBy(ctx context.Context) ([]structs.Movie, error) {
 	m, err := s.repo.GetMovieBy(ctx)
