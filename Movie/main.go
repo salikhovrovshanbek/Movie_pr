@@ -11,10 +11,10 @@ import (
 
 func main() {
 	cfg, err := configs.Load()
-	Functions.CheckERR(err)
+	Functions.CheckERROR(err, "loading config")
 
 	repo, err := postgres.NewPostgres(cfg.Config)
-	Functions.CheckERR(err)
+	Functions.CheckERROR(err, "creating psql")
 
 	svc := service.New(repo)
 

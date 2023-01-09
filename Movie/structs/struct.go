@@ -32,7 +32,7 @@ type MoiveGenres struct {
 	GenreID uuid.UUID `json:"genreID"`
 }
 
-type Moives struct {
+type Movies struct {
 	ID          uuid.UUID `json:"id"`
 	DirectorID  uuid.UUID `json:"directorid"`
 	GenreID     uuid.UUID `json:"genreid"`

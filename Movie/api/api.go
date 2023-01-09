@@ -33,7 +33,7 @@ func InitRouter(s server.Server) *gin.Engine {
 	r.DELETE("/directors/:id")
 	r.DELETE("/actor")
 
-	//r.GET("/getmovie", s.GetMovieBy)
+	r.GET("/getmovie", s.GetMovieBy)
 	//r.GET("/getauth/:id", s.GetAuthMovies)
 	//r.GET("/newmovie", s.CreateMovie)
 	//r.GET("/newauth", s.CreateAuthor)

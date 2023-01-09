@@ -6,9 +6,16 @@ import (
 	"net/http"
 )
 
-func CheckERR(err error) {
+func CheckERR(err error, str string) error {
 	if err != nil {
-		log.Println("error:", err.Error())
+		log.Println("loc:", str, "error:", err.Error())
+	}
+	return err
+}
+
+func CheckERROR(err error, str string) {
+	if err != nil {
+		log.Println("loc:", str, "error:", err.Error())
 		return
 	}
 }

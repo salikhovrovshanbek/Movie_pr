@@ -1,7 +1,9 @@
 package server
 
 import (
+	"Postgres_Gin/Functions"
 	"Postgres_Gin/service"
+	"github.com/gin-gonic/gin"
 )
 
 type Server struct {
@@ -14,15 +16,16 @@ func New(service2 service.Service) Server {
 	}
 }
 
-//func (s Server) GetMovieBy(c *gin.Context) {
-//	m, err := s.svc.GetMovieBy(c)
-//	if err != nil {
-//		Functions.CheckSERVERErr(err, c)
-//		return
-//	}
-//
-//	Functions.SERVEROKDATA(m, c)
-//}
+func (s Server) GetMovieBy(c *gin.Context) {
+	m, err := s.svc.GetMovieBy(c)
+	if err != nil {
+		Functions.CheckSERVERErr(err, c)
+		return
+	}
+
+	Functions.SERVEROKDATA(m, c)
+}
+
 //
 //func (s Server) GetAuthMovies(c *gin.Context) {
 //	id := c.Param("id")

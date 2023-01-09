@@ -6,13 +6,13 @@ import (
 )
 
 type Repo interface {
-	CreateMovie(ctx context.Context, s structs.Movie) error
+	CreateMovie(ctx context.Context, s structs.Movies) error
 	//CreateAuthor(ctx context.Context,s structs.Author)error
 	CreateGenre(ctx context.Context, s structs.Genres) error
 	CreateDirector(ctx context.Context, s structs.Directors) error
 	CreateActor(ctx context.Context, s structs.Actors) error
 
-	GetMovies(ctx context.Context) ([]structs.Moives, error)
+	GetMovies(ctx context.Context) ([]structs.Movies, error)
 	//GetAuthors(ctx context.Context)([]structs.Author,error)
 	GetGenres(ctx context.Context) ([]structs.Genres, error)
 	GetDirectors(ctx context.Context) ([]structs.Directors, error)
@@ -30,7 +30,7 @@ type Repo interface {
 	DeleteDirector(ctx context.Context) error
 	DeleteActor(ctx context.Context) error
 
-	//GetMovieBy(ctx context.Context) ([]structs.Movie, error)
+	GetMovieBy(ctx context.Context) ([]structs.Movie, error)
 	//GetAuthMovies(ctx context.Context, id string) ([]structs.Movie, error)
 	//CreateMovie(ctx context.Context, movie structs.Movie) error
 	//CreateActor(ctx context.Context) error

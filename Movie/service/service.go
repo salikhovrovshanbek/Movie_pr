@@ -2,6 +2,9 @@ package service
 
 import (
 	"Postgres_Gin/repository"
+	"Postgres_Gin/structs"
+	"context"
+	"fmt"
 )
 
 type Service struct {
@@ -14,14 +17,50 @@ func New(repo repository.Repo) Service {
 	}
 }
 
-//
-//func (s Service) GetMovieBy(ctx context.Context) ([]structs.Movie, error) {
-//	m, err := s.repo.GetMovieBy(ctx)
-//	if err != nil {
-//		return []structs.Movie{}, err
-//	}
-//	return m, nil
-//}
+func (s Service) CreateMovie(ctx context.Context,m structs.Movies) error {
+	if err:=s.repo.CreateMovie(ctx,m);err!=nil{
+		return err
+	}
+	return nil
+}
+
+func (s Service) CreateGenre(ctx context.Context,g structs.Genres) error {
+	if err:=s.repo.CreateGenre(ctx,g);err!=nil{
+		return err
+	}
+
+}
+
+func (s Service) CreateDirector(ctx context.Context,d structs.Directors) error {
+	if err:=s.repo.Create();err!=nil{
+		return err
+	}
+
+}
+
+func (s Service) CreateActor(ctx context.Context,a structs.Actors) error {
+	if err:=s.repo.Create();err!=nil{
+		return err
+	}
+
+}
+
+func (s Service) Create(ctx context.Context,structs.) error {
+
+}
+
+
+
+
+func (s Service) GetMovieBy(ctx context.Context) ([]structs.Movie, error) {
+	m, err := s.repo.GetMovieBy(ctx)
+	if err != nil {
+		return []structs.Movie{}, err
+	}
+	fmt.Println(m)
+	return m, nil
+}
+
 //
 //func (s Service) GetAuthMovies(ctx context.Context, id string) ([]structs.Movie, error) {
 //	m, err := s.repo.GetAuthMovies(ctx, id)
