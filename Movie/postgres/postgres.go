@@ -51,7 +51,7 @@ func (p *Postgres) CreateGenre(ctx context.Context, s structs.Genres) error {
 }
 
 func (p *Postgres) CreateDirector(ctx context.Context, s structs.Directors) error {
-	query := `INSERT INTO directors(id,firtsname,lastname,nationality,birth)
+	query := `INSERT INTO directors(id,firstname,lastname,nationality,birth)
 					VALUES ($1,$2,$3,$4,$5)`
 
 	_, err := p.db.ExecContext(ctx, query, s.ID, s.FirstName, s.LastName, s.Nationality, s.Birth)
@@ -60,7 +60,7 @@ func (p *Postgres) CreateDirector(ctx context.Context, s structs.Directors) erro
 }
 
 func (p *Postgres) CreateActor(ctx context.Context, s structs.Actors) error {
-	query := `INSERT INTO actor(id,firtsname,lastname,nationality,birth)
+	query := `INSERT INTO actor(id,firstname,lastname,nationality,birth)
 					VALUES ($1,$2,$3,$4,$5)`
 
 	_, err := p.db.ExecContext(ctx, query, s.ID, s.FirstName, s.LastName, s.Nationality, s.Birth)

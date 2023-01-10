@@ -75,6 +75,7 @@ func (s Server) CreateDirector(c *gin.Context) {
 			"ok":    false,
 			"error": err,
 		})
+		return
 	}
 	if err := s.svc.CreateDirector(c, m); err != nil {
 		Functions.CheckSERVERErr(err, c)
