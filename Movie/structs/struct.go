@@ -24,7 +24,7 @@ type Author struct {
 
 type Genres struct {
 	ID        uuid.UUID `json:"id"`
-	GenreName string    `json:"genrename"`
+	GenreName string    `json:"genre_name"`
 }
 
 type MoiveGenres struct {

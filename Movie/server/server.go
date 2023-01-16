@@ -4,6 +4,7 @@ import (
 	"Postgres_Gin/Functions"
 	"Postgres_Gin/service"
 	"Postgres_Gin/structs"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -185,19 +186,29 @@ func (s Server) UpdateMovie(c *gin.Context) {
 
 func (s Server) UpdateGenre(c *gin.Context) {
 	var str structs.Genres
-	if err := c.ShouldBindJSON(str); err != nil {
+	if err := c.ShouldBindJSON(&str); err != nil {
 		Functions.CheckERROR(err, "Updating methods in server pkg")
+		c.JSON(http.StatusBadRequest, map[string]string{
+			"error": "ok",
+			"log":   fmt.Sprintf("%v", err),
+		})
+		return
 	}
 	err := s.svc.UpdateGenre(c, str)
 	if err != nil {
 		Functions.CheckSERVERErr(err, c)
+		c.JSON(http.StatusInternalServerError, map[string]string{
+			"error": "ok",
+			"log":   fmt.Sprintf("%v", err),
+		})
+		return
 	}
 	Functions.SERVEROKAY(c)
 }
 
 func (s Server) UpdateDirector(c *gin.Context) {
 	var str structs.Directors
-	if err := c.ShouldBindJSON(str); err != nil {
+	if err := c.ShouldBindJSON(&str); err != nil {
 		Functions.CheckERROR(err, "Updating methods in server pkg")
 	}
 	err := s.svc.UpdateDirector(c, str)
@@ -219,7 +230,7 @@ func (s Server) UpdateActor(c *gin.Context) {
 	Functions.SERVEROKAY(c)
 }
 
-// 					DELETE
+// TODO DELETE
 
 func (s Server) DeleteMovie(c *gin.Context) {
 	id := c.Param("id")
